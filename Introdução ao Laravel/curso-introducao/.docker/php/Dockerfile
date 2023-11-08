@@ -11,7 +11,7 @@ RUN apt update && apt install -y curl \
     zip \
     unzip
 
-RUN docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
@@ -21,7 +21,5 @@ RUN mkdir -p /home/$user/.composer && chown -R $user:$user /home/$user
 WORKDIR /var/www
 
 USER $user
-
-RUN mkdir -p /var/www && chown -R $user:$user /var/www
 
 EXPOSE 9000
